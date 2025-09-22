@@ -49,15 +49,14 @@
             border-radius: 50%;
             border: 5px solid rgba(255, 255, 255, 0.3);
             margin: 0 auto 1rem;
+            overflow: hidden;
             background-color: #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
-        .profile-img i {
-            font-size: 4rem;
-            color: white;
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         header h1 {
@@ -346,8 +345,7 @@
     <header>
         <div class="container">
             <div class="profile-img">
-                 
-                <i class="fas fa-user"><img src="1683451960668.jpg" alt="Abir Arshad"></i>
+                <img src="1683451960668.jpg" alt="Abir Arshad">
             </div>
             <h1>Abir Arshad</h1>
             <h2>Software Quality Assurance Engineer</h2>
