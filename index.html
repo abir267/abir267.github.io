@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -580,10 +580,10 @@ footer{
   --font-mono:'JetBrains Mono',monospace;
 }
 #game-overlay.go-open{display:block;}
-.go-wrap{max-width:540px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+.go-wrap{max-width:540px;margin:0 auto;padding:5rem 1.5rem 4rem;}
 .go-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
 .go-label{font-family:var(--mono);font-size:0.72rem;color:var(--warm);letter-spacing:3px;text-transform:uppercase;}
-.go-close{background:none;border:1px solid rgba(255,107,53,0.25);color:var(--warm);padding:0.35rem 1rem;cursor:pointer;font-family:var(--mono);font-size:0.72rem;letter-spacing:1px;transition:background 0.2s,border-color 0.2s;}
+.go-close{position:fixed;top:1rem;right:1.5rem;z-index:1001;background:rgba(6,7,15,0.9);border:1px solid rgba(255,107,53,0.35);color:var(--warm);padding:0.4rem 1rem;cursor:pointer;font-family:var(--mono);font-size:0.72rem;letter-spacing:1px;transition:background 0.2s,border-color 0.2s;backdrop-filter:blur(8px);}
 .go-close:hover{background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.5);}
 .go-tabs{display:flex;border-bottom:1px solid rgba(255,107,53,0.14);margin-bottom:1.5rem;gap:0.2rem;}
 .go-tab{font-family:var(--mono);font-size:0.68rem;letter-spacing:1px;padding:0.65rem 1rem;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:rgba(122,122,138,0.75);cursor:pointer;transition:color 0.2s;}
@@ -666,7 +666,7 @@ footer{
     <li><a href="#projects">work</a></li>
     <li><a href="#skills">skills</a></li>
     <li><a href="#experience">experience</a></li>
-    <li><a href="#education">edu</a></li><li><a href="#contact">contact</a></li><li><a href="#" onclick="openGames();return false;" style="color:var(--warm)!important;font-family:var(--mono)">// play</a></li>
+    <li><a href="#education">edu</a></li><li><a href="#contact">contact</a></li>
   </ul>
 </nav>
 
@@ -1271,6 +1271,7 @@ function openGames(){
   document.getElementById('game-overlay').classList.add('go-open');
   document.body.style.overflow='hidden';
 }
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('game-overlay').classList.contains('go-open'))closeGames();});
 function closeGames(){
   document.getElementById('game-overlay').classList.remove('go-open');
   document.body.style.overflow='';
@@ -1438,5 +1439,21 @@ function bofReset(){
 }
 </script>
 
+
+<div id="play-egg" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:50;opacity:0;transition:opacity 0.4s;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'">
+  <a href="#" onclick="openGames();return false;" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:rgba(255,107,53,0.5);letter-spacing:2px;text-decoration:none;transition:color 0.2s;" onmouseenter="this.style.color='rgba(255,107,53,1)'" onmouseleave="this.style.color='rgba(255,107,53,0.5)'">// play</a>
+</div>
+<script>
+(function(){
+  var egg = document.getElementById('play-egg');
+  var revealed = false;
+  window.addEventListener('scroll', function(){
+    if(!revealed && window.scrollY + window.innerHeight >= document.body.scrollHeight - 100){
+      revealed = true;
+      egg.style.opacity = '0.6';
+    }
+  }, {passive:true});
+})();
+</script>
 </body>
 </html>
