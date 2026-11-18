@@ -581,10 +581,9 @@ footer{
 .go-wrap{max-width:540px;margin:0 auto;padding:5rem 1.5rem 4rem;}
 .go-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
 .go-label{font-family:var(--mono);font-size:0.72rem;color:var(--warm);letter-spacing:3px;text-transform:uppercase;}
-.go-close{background:none;border:1px solid rgba(255,107,53,0.3);color:var(--warm);padding:0.4rem 1rem;cursor:pointer;font-family:var(--mono);font-size:0.72rem;letter-spacing:1px;transition:background 0.2s;}.go-close:hover{background:rgba(255,107,53,0.1);}
-.go-header{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1.5rem;border-bottom:1px solid rgba(255,107,53,0.12);background:rgba(6,7,15,0.99);}
+
 .go-scroll{flex:1;overflow-y:auto;}
-.go-close:hover{background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.5);}
+
 .go-tabs{display:flex;border-bottom:1px solid rgba(255,107,53,0.14);margin-bottom:1.5rem;gap:0.2rem;}
 .go-tab{font-family:var(--mono);font-size:0.68rem;letter-spacing:1px;padding:0.65rem 1rem;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:rgba(122,122,138,0.75);cursor:pointer;transition:color 0.2s;}
 .go-tab.go-tab-on{color:var(--warm);border-bottom-color:var(--warm);}
@@ -1160,14 +1159,12 @@ footer{
 })();
 </script>
 
-<button id="go-close-btn" onclick="closeGames()" style="display:none;position:fixed;top:0.9rem;right:1.2rem;z-index:99999;background:#ff6b35;border:none;color:#06070f;padding:0.5rem 1.2rem;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:700;letter-spacing:1px;">&#x2715; close</button>
 <div id="game-overlay">
-<div class="go-header">
-    <span class="go-label">// play</span>
-    <button class="go-close" onclick="closeGames()">&#x2715; close</button>
-  </div>
 <div class="go-scroll"><div class="go-wrap">
-  <div class="go-tabs">
+  <div style="display:flex;justify-content:flex-end;padding:1rem 0 0.5rem;position:sticky;top:0;z-index:5;background:#06070f;border-bottom:1px solid rgba(255,107,53,0.1);margin-bottom:1rem;">
+  <button onclick="closeGames()" style="background:#ff6b35;color:#06070f;border:none;padding:0.5rem 1.3rem;font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-weight:700;letter-spacing:1px;cursor:pointer;">&larr; close</button>
+</div>
+<div class="go-tabs">
     <button class="go-tab go-tab-on" id="gtab0" onclick="switchGoTab(0)">// veggie inspector</button>
     <button class="go-tab" id="gtab1" onclick="switchGoTab(1)">// bug or feature?</button>
   </div>
@@ -1279,13 +1276,11 @@ footer{
 <script>
 function openGames(){
   document.getElementById('game-overlay').classList.add('go-open');
-  document.getElementById('go-close-btn').style.display='block';
   document.body.style.overflow='hidden';
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('game-overlay').classList.contains('go-open'))closeGames();});
 function closeGames(){
   document.getElementById('game-overlay').classList.remove('go-open');
-  document.getElementById('go-close-btn').style.display='none';
   document.body.style.overflow='';
   if(typeof qviTimerID!=='undefined'&&qviTimerID){clearInterval(qviTimerID);qviTimerID=null;}
 }
