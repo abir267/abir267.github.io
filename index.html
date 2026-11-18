@@ -543,6 +543,117 @@ footer{
   font-size:0.82rem;color:var(--grey);line-height:1.65;
 }
 @media(max-width:768px){.saas-grid{grid-template-columns:1fr}}
+
+/* ===== GAME OVERLAY ===== */
+#game-overlay{
+  display:none;
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(6,7,15,0.97);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  overflow-y:auto;
+  --surface-1:rgba(255,107,53,0.04);
+  --border:rgba(255,107,53,0.14);
+  --border-strong:rgba(255,107,53,0.3);
+  --text-primary:#f5f0eb;
+  --text-secondary:#7a7a8a;
+  --text-muted:rgba(122,122,138,0.6);
+  --bg-danger:rgba(230,57,70,0.1);
+  --border-danger:rgba(230,57,70,0.4);
+  --text-danger:#e05e6a;
+  --bg-success:rgba(39,174,96,0.08);
+  --border-success:rgba(39,174,96,0.35);
+  --text-success:#2ecc71;
+  --fill-accent:#ff6b35;
+  --on-accent:#06070f;
+  --bg-accent:rgba(255,107,53,0.1);
+  --border-accent:rgba(255,107,53,0.35);
+  --text-accent:#ff6b35;
+  --bg-pro:rgba(142,68,173,0.1);
+  --border-pro:rgba(142,68,173,0.4);
+  --text-pro:#9b59b6;
+  --bg-warning:rgba(241,196,15,0.1);
+  --border-warning:rgba(241,196,15,0.35);
+  --text-warning:#d4ac0d;
+  --radius:4px;
+  --font-sans:'Space Grotesk',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+#game-overlay.go-open{display:block;}
+.go-wrap{max-width:540px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+.go-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
+.go-label{font-family:var(--mono);font-size:0.72rem;color:var(--warm);letter-spacing:3px;text-transform:uppercase;}
+.go-close{background:none;border:1px solid rgba(255,107,53,0.25);color:var(--warm);padding:0.35rem 1rem;cursor:pointer;font-family:var(--mono);font-size:0.72rem;letter-spacing:1px;transition:background 0.2s,border-color 0.2s;}
+.go-close:hover{background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.5);}
+.go-tabs{display:flex;border-bottom:1px solid rgba(255,107,53,0.14);margin-bottom:1.5rem;gap:0.2rem;}
+.go-tab{font-family:var(--mono);font-size:0.68rem;letter-spacing:1px;padding:0.65rem 1rem;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:rgba(122,122,138,0.75);cursor:pointer;transition:color 0.2s;}
+.go-tab.go-tab-on{color:var(--warm);border-bottom-color:var(--warm);}
+.go-tab:hover{color:#f5f0eb;}
+.go-pane{display:none;}
+.go-pane.go-pane-on{display:block;}
+.go-screen{padding:1rem 0;}
+.go-mini-label{font-family:var(--mono);font-size:0.63rem;color:var(--grey);letter-spacing:3px;text-transform:uppercase;margin-bottom:0.75rem;}
+.go-game-title{font-family:var(--sans);font-size:1.6rem;font-weight:700;color:#f5f0eb;margin-bottom:0.75rem;letter-spacing:-0.3px;}
+.go-desc{font-family:var(--mono);font-size:0.78rem;color:rgba(122,122,138,0.9);line-height:1.6;margin-bottom:1.5rem;}
+.go-rules{display:flex;gap:1rem;margin-bottom:1.75rem;}
+.go-rule{font-family:var(--mono);font-size:0.72rem;color:rgba(122,122,138,0.8);display:flex;align-items:center;gap:0.5rem;}
+.go-rule-val{color:var(--warm);font-weight:600;}
+.go-rule-neg{color:#e05e6a;}
+.go-rule-pos{color:#2ecc71;}
+.go-primary-btn{background:var(--warm);color:#06070f;border:none;padding:0.75rem 2rem;font-family:var(--mono);font-size:0.78rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s,transform 0.15s;}
+.go-primary-btn:hover{opacity:0.88;transform:translateY(-1px);}
+.go-secondary-btn{background:none;color:var(--warm);border:1px solid rgba(255,107,53,0.3);padding:0.6rem 1.5rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:1px;cursor:pointer;transition:background 0.2s,border-color 0.2s;}
+.go-secondary-btn:hover{background:rgba(255,107,53,0.08);border-color:rgba(255,107,53,0.5);}
+.go-hud{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;padding:1rem;background:rgba(255,107,53,0.04);border:1px solid rgba(255,107,53,0.1);margin-bottom:1rem;}
+.go-hud-lbl{display:block;font-family:var(--mono);font-size:0.6rem;color:var(--grey);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.2rem;}
+.go-hud-val{font-family:var(--mono);font-size:1.1rem;font-weight:600;color:#f5f0eb;}
+.go-timer-wrap{height:3px;background:rgba(255,107,53,0.1);margin-bottom:1.2rem;overflow:hidden;}
+.go-timer-bar{height:100%;background:var(--warm);transition:width 1s linear,background 0.5s;}
+.go-vcard{background:rgba(255,107,53,0.03);border:1px solid rgba(255,107,53,0.12);padding:1.5rem;text-align:center;position:relative;margin-bottom:1rem;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:border-color 0.3s;}
+.go-vcard-pass{border-color:#2ecc71!important;background:rgba(39,174,96,0.06)!important;}
+.go-vcard-fail{border-color:#e05e6a!important;background:rgba(230,57,70,0.06)!important;}
+.go-vflash{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:1.6rem;font-weight:700;letter-spacing:4px;opacity:0;pointer-events:none;transition:opacity 0.2s;}
+.go-vflash-pass{color:#2ecc71;}
+.go-vflash-fail{color:#e05e6a;}
+.go-vflash.go-vflash-show{opacity:1;}
+.go-vname{font-family:var(--sans);font-size:1rem;font-weight:600;color:#f5f0eb;margin-top:0.75rem;}
+.go-vhint{font-family:var(--mono);font-size:0.68rem;color:rgba(122,122,138,0.7);margin-top:0.3rem;}
+.go-judge-btns{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem;}
+.go-judge-btn{padding:0.75rem;font-family:var(--mono);font-size:0.78rem;font-weight:600;letter-spacing:1px;border:1px solid;cursor:pointer;transition:background 0.15s,transform 0.1s;}
+.go-judge-btn:hover{transform:translateY(-1px);}
+.go-judge-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+.go-fail-btn{background:rgba(230,57,70,0.08);border-color:rgba(230,57,70,0.3);color:#e05e6a;}
+.go-fail-btn:hover:not(:disabled){background:rgba(230,57,70,0.16);}
+.go-pass-btn{background:rgba(39,174,96,0.08);border-color:rgba(39,174,96,0.3);color:#2ecc71;}
+.go-pass-btn:hover:not(:disabled){background:rgba(39,174,96,0.16);}
+.go-grade-ring{width:72px;height:72px;border-radius:50%;border:2px solid var(--warm);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0.75rem auto 0.5rem;background:rgba(255,107,53,0.07);}
+.go-grade-num{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:var(--warm);}
+.go-grade-sub{font-family:var(--mono);font-size:0.5rem;letter-spacing:2px;color:var(--grey);text-transform:uppercase;}
+.go-final-score{font-family:var(--mono);font-size:2.2rem;font-weight:700;color:#f5f0eb;margin-top:0.5rem;}
+.go-end-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding:1rem;background:rgba(255,107,53,0.04);border:1px solid rgba(255,107,53,0.1);margin-bottom:1rem;}
+.go-end-stat{text-align:center;}
+.go-end-num{display:block;font-family:var(--mono);font-size:1rem;font-weight:600;color:var(--warm);}
+.go-end-msg{font-family:var(--mono);font-size:0.78rem;color:rgba(122,122,138,0.9);line-height:1.5;}
+.go-bcard{background:rgba(255,107,53,0.03);border:1px solid rgba(255,107,53,0.12);padding:1.5rem;margin-bottom:1rem;}
+.go-btag{display:inline-block;font-family:var(--mono);font-size:0.6rem;letter-spacing:1.5px;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:2px;border:1px solid;margin-bottom:0.75rem;}
+.go-btag-security{background:rgba(230,57,70,0.1);border-color:rgba(230,57,70,0.35);color:#e05e6a;}
+.go-btag-auth{background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.35);color:#ff6b35;}
+.go-btag-ux{background:rgba(52,152,219,0.1);border-color:rgba(52,152,219,0.35);color:#5dade2;}
+.go-btag-data{background:rgba(241,196,15,0.1);border-color:rgba(241,196,15,0.35);color:#d4ac0d;}
+.go-btag-perf{background:rgba(39,174,96,0.08);border-color:rgba(39,174,96,0.35);color:#2ecc71;}
+.go-btext{font-family:var(--mono);font-size:0.84rem;color:#f5f0eb;line-height:1.65;}
+.go-brev{padding:0.9rem 1rem;border-radius:2px;margin-top:0.75rem;border-left:3px solid;}
+.go-brev-ok{background:rgba(39,174,96,0.08);border-color:#2ecc71;}
+.go-brev-err{background:rgba(230,57,70,0.08);border-color:#e05e6a;}
+.go-brev-head{font-family:var(--mono);font-size:0.72rem;font-weight:600;letter-spacing:0.5px;margin-bottom:0.4rem;}
+.go-brev-ok .go-brev-head{color:#2ecc71;}
+.go-brev-err .go-brev-head{color:#e05e6a;}
+.go-brev-body{font-family:var(--mono);font-size:0.72rem;color:rgba(122,122,138,0.9);line-height:1.6;}
+@media(max-width:600px){
+  .go-wrap{padding:1.5rem 1rem 3rem;}
+  .go-game-title{font-size:1.3rem;}
+  .go-rules{flex-wrap:wrap;gap:0.6rem;}
+}
 </style>
 </head>
 <body>
@@ -555,7 +666,7 @@ footer{
     <li><a href="#projects">work</a></li>
     <li><a href="#skills">skills</a></li>
     <li><a href="#experience">experience</a></li>
-    <li><a href="#education">edu</a></li><li><a href="#contact">contact</a></li>
+    <li><a href="#education">edu</a></li><li><a href="#contact">contact</a></li><li><a href="#" onclick="openGames();return false;" style="color:var(--warm)!important;font-family:var(--mono)">// play</a></li>
   </ul>
 </nav>
 
@@ -1041,5 +1152,291 @@ footer{
   }, {passive:true});
 })();
 </script>
+
+<div id="game-overlay">
+<div class="go-wrap">
+  <div class="go-top">
+    <span class="go-label">// play</span>
+    <button class="go-close" onclick="closeGames()">&#x2715; close</button>
+  </div>
+  <div class="go-tabs">
+    <button class="go-tab go-tab-on" id="gtab0" onclick="switchGoTab(0)">// veggie inspector</button>
+    <button class="go-tab" id="gtab1" onclick="switchGoTab(1)">// bug or feature?</button>
+  </div>
+
+  <!-- PANE 0: QA Veggie Inspector -->
+  <div class="go-pane go-pane-on" id="gpane0">
+    <div id="qvi-start" class="go-screen">
+      <div class="go-mini-label">MINI GAME 01</div>
+      <div class="go-game-title">QA Veggie Inspector</div>
+      <p class="go-desc">Vegetables roll down the line. Pass the good ones, fail the defects. 60 seconds.</p>
+      <div class="go-rules">
+        <div class="go-rule"><span class="go-rule-val">+10</span>Correct call</div>
+        <div class="go-rule"><span class="go-rule-val go-rule-neg">-5</span>Wrong call</div>
+        <div class="go-rule"><span class="go-rule-val">60s</span>On the clock</div>
+      </div>
+      <button class="go-primary-btn" onclick="qviStart()">Start inspection</button>
+    </div>
+
+    <div id="qvi-play" style="display:none">
+      <div class="go-hud">
+        <div><span class="go-hud-lbl">SCORE</span><span class="go-hud-val" id="qvi-h-score">0</span></div>
+        <div style="text-align:center"><span class="go-hud-lbl">TIME</span><span class="go-hud-val" id="qvi-h-time">60</span></div>
+        <div style="text-align:right"><span class="go-hud-lbl">ACCURACY</span><span class="go-hud-val" id="qvi-h-acc">—</span></div>
+      </div>
+      <div class="go-timer-wrap"><div class="go-timer-bar" id="qvi-tbar"></div></div>
+      <div class="go-vcard" id="qvi-card">
+        <div class="go-vflash go-vflash-pass" id="qvi-flash-pass">PASS</div>
+        <div class="go-vflash go-vflash-fail" id="qvi-flash-fail">FAIL</div>
+        <div id="qvi-svg"></div>
+        <div class="go-vname" id="qvi-name">—</div>
+        <div class="go-vhint" id="qvi-hint">Inspect carefully</div>
+      </div>
+      <div class="go-judge-btns">
+        <button class="go-judge-btn go-fail-btn" onclick="qviJudge(false)">&#x2717; Fail it</button>
+        <button class="go-judge-btn go-pass-btn" onclick="qviJudge(true)">&#x2713; Pass it</button>
+      </div>
+    </div>
+
+    <div id="qvi-end" style="display:none;text-align:center;padding:1rem 0">
+      <div class="go-mini-label">INSPECTION COMPLETE</div>
+      <div class="go-grade-ring"><span class="go-grade-num" id="qvi-eg">—</span><span class="go-grade-sub">GRADE</span></div>
+      <div class="go-final-score" id="qvi-es">0</div>
+      <div style="font-size:0.8rem;color:rgba(122,122,138,0.8);margin-bottom:1rem">final score</div>
+      <div class="go-end-stats">
+        <div class="go-end-stat"><span class="go-end-num" id="qvi-ec">0</span><span class="go-mini-label">CORRECT</span></div>
+        <div class="go-end-stat"><span class="go-end-num" id="qvi-ea">0%</span><span class="go-mini-label">ACCURACY</span></div>
+        <div class="go-end-stat"><span class="go-end-num" id="qvi-eb">0</span><span class="go-mini-label">BUGS CAUGHT</span></div>
+      </div>
+      <button class="go-secondary-btn" onclick="qviReset()">Play again</button>
+    </div>
+  </div>
+
+  <!-- PANE 1: Bug or Feature? -->
+  <div class="go-pane" id="gpane1">
+    <div id="bof-start" class="go-screen">
+      <div class="go-mini-label">MINI GAME 02</div>
+      <div class="go-game-title">Bug or feature?</div>
+      <p class="go-desc">Real software behaviors. You decide: intentional design or unintended defect? Some are trickier than they look.</p>
+      <div class="go-rules">
+        <div class="go-rule"><span class="go-rule-val">+10</span>Correct answer</div>
+        <div class="go-rule"><span class="go-rule-val go-rule-pos">+5</span>Streak bonus</div>
+        <div class="go-rule"><span class="go-rule-val go-rule-neg">-3</span>Wrong answer</div>
+      </div>
+      <button class="go-primary-btn" onclick="bofStart()">Start quiz</button>
+    </div>
+
+    <div id="bof-game" style="display:none">
+      <div class="go-hud">
+        <div><span class="go-hud-lbl">SCORE</span><span class="go-hud-val" id="bof-h-score">0</span></div>
+        <div style="text-align:center"><span class="go-hud-lbl">QUESTION</span><span class="go-hud-val" id="bof-h-q">1/12</span></div>
+        <div style="text-align:right"><span class="go-hud-lbl">STREAK</span><span class="go-hud-val" id="bof-h-streak">0</span></div>
+      </div>
+      <div class="go-timer-wrap"><div class="go-timer-bar" id="bof-pbar" style="background:var(--warm)"></div></div>
+      <div class="go-bcard">
+        <span class="go-btag" id="bof-tag">security</span>
+        <div class="go-btext" id="bof-text">Loading...</div>
+      </div>
+      <div class="go-judge-btns">
+        <button class="go-judge-btn go-fail-btn" id="bof-bbug" onclick="bofAnswer(false)">&#x1F41E; Bug</button>
+        <button class="go-judge-btn go-pass-btn" id="bof-bfeat" onclick="bofAnswer(true)">&#x2728; Feature</button>
+      </div>
+      <div class="go-brev" id="bof-rev" style="display:none">
+        <div class="go-brev-head" id="bof-rev-head"></div>
+        <div class="go-brev-body" id="bof-rev-body"></div>
+      </div>
+      <button class="go-secondary-btn" id="bof-next" onclick="bofNextQ()" style="display:none;width:100%;margin-top:0.8rem">Next &rarr;</button>
+    </div>
+
+    <div id="bof-end" style="display:none;text-align:center;padding:1rem 0">
+      <div class="go-mini-label">QUIZ COMPLETE</div>
+      <div class="go-grade-ring"><span class="go-grade-num" id="bof-eg">—</span><span class="go-grade-sub">GRADE</span></div>
+      <div class="go-final-score" id="bof-es">0</div>
+      <div style="font-size:0.8rem;color:rgba(122,122,138,0.8);margin-bottom:4px">points</div>
+      <div class="go-end-msg" id="bof-emsg"></div>
+      <div class="go-end-stats" style="margin-top:1rem">
+        <div class="go-end-stat"><span class="go-end-num" id="bof-ec">0</span><span class="go-mini-label">CORRECT</span></div>
+        <div class="go-end-stat"><span class="go-end-num" id="bof-ea">0%</span><span class="go-mini-label">ACCURACY</span></div>
+        <div class="go-end-stat"><span class="go-end-num" id="bof-estr">0</span><span class="go-mini-label">BEST STREAK</span></div>
+      </div>
+      <button class="go-secondary-btn" onclick="bofReset()" style="margin-top:1rem">Play again</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+function openGames(){
+  document.getElementById('game-overlay').classList.add('go-open');
+  document.body.style.overflow='hidden';
+}
+function closeGames(){
+  document.getElementById('game-overlay').classList.remove('go-open');
+  document.body.style.overflow='';
+  if(typeof qviTimerID!=='undefined'&&qviTimerID){clearInterval(qviTimerID);qviTimerID=null;}
+}
+function switchGoTab(n){
+  for(var i=0;i<2;i++){
+    document.getElementById('gtab'+i).classList.toggle('go-tab-on',i===n);
+    document.getElementById('gpane'+i).classList.toggle('go-pane-on',i===n);
+  }
+}
+
+/* ---- QVI GAME ---- */
+var QVI_VEGGIES=[
+  {name:'Tomato',good:'<svg viewBox="0 0 80 80" width="80" height="80"><rect x="36" y="8" width="8" height="16" rx="4" fill="#2ecc71"/><rect x="30" y="8" width="6" height="12" rx="3" fill="#27ae60" transform="rotate(-25,33,8)"/><rect x="44" y="8" width="6" height="12" rx="3" fill="#27ae60" transform="rotate(25,47,8)"/><circle cx="40" cy="47" r="29" fill="#c0392b"/><ellipse cx="40" cy="22" rx="10" ry="6" fill="#c0392b"/></svg>',bad:'<svg viewBox="0 0 80 80" width="80" height="80"><rect x="36" y="8" width="8" height="16" rx="4" fill="#2ecc71"/><circle cx="40" cy="47" r="29" fill="#b7950b"/><circle cx="52" cy="43" r="9" fill="rgba(0,0,0,0.25)"/><circle cx="31" cy="55" r="6" fill="rgba(0,0,0,0.2)"/><ellipse cx="40" cy="22" rx="10" ry="6" fill="#b7950b"/></svg>',defect:'Unusual discoloration and surface bruising detected'},
+  {name:'Carrot',good:'<svg viewBox="0 0 80 80" width="80" height="80"><ellipse cx="40" cy="22" rx="6" ry="6" fill="#27ae60"/><rect x="37" y="14" width="5" height="10" fill="#e67e22"/><polygon points="40,72 20,20 60,20" fill="#e67e22"/><line x1="27" y1="35" x2="53" y2="35" stroke="#d35400" stroke-width="1.5" stroke-linecap="round"/><line x1="25" y1="45" x2="55" y2="45" stroke="#d35400" stroke-width="1.5" stroke-linecap="round"/><line x1="27" y1="55" x2="53" y2="55" stroke="#d35400" stroke-width="1.5" stroke-linecap="round"/></svg>',bad:'<svg viewBox="0 0 80 80" width="80" height="80"><ellipse cx="40" cy="22" rx="6" ry="6" fill="#27ae60"/><rect x="37" y="14" width="5" height="10" fill="#bdc3c7"/><polygon points="40,72 20,20 60,20" fill="#bdc3c7"/><circle cx="35" cy="40" r="5" fill="rgba(0,0,0,0.15)"/><circle cx="47" cy="55" r="4" fill="rgba(0,0,0,0.12)"/></svg>',defect:'Pale coloring — possible nutrient deficiency or early rot'},
+  {name:'Broccoli',good:'<svg viewBox="0 0 80 80" width="80" height="80"><rect x="35" y="45" width="10" height="25" rx="3" fill="#795548"/><circle cx="30" cy="38" r="14" fill="#27ae60"/><circle cx="50" cy="38" r="14" fill="#27ae60"/><circle cx="40" cy="28" r="16" fill="#2ecc71"/><circle cx="30" cy="38" r="10" fill="#2ecc71"/><circle cx="50" cy="38" r="10" fill="#2ecc71"/></svg>',bad:'<svg viewBox="0 0 80 80" width="80" height="80"><rect x="35" y="45" width="10" height="25" rx="3" fill="#795548"/><circle cx="30" cy="38" r="14" fill="#d4ac0d"/><circle cx="50" cy="38" r="14" fill="#d4ac0d"/><circle cx="40" cy="28" r="16" fill="#f1c40f"/><circle cx="30" cy="38" r="10" fill="#f1c40f"/><circle cx="50" cy="38" r="10" fill="#f1c40f"/></svg>',defect:'Yellowing head — over-ripe or improper cold storage'},
+  {name:'Eggplant',good:'<svg viewBox="0 0 80 80" width="80" height="80"><rect x="36" y="6" width="8" height="14" rx="4" fill="#27ae60"/><rect x="28" y="10" width="12" height="6" rx="3" fill="#2ecc71" transform="rotate(-20,34,13)"/><ellipse cx="40" cy="50" rx="22" ry="28" fill="#8e44ad"/><ellipse cx="40" cy="30" rx="8" ry="6" fill="#9b59b6"/></svg>',bad:'<svg viewBox="0 0 80 80" width="80" height="80"><rect x="36" y="6" width="8" height="14" rx="4" fill="#27ae60"/><ellipse cx="40" cy="50" rx="22" ry="28" fill="#784212"/><ellipse cx="40" cy="30" rx="8" ry="6" fill="#6e2f0e"/><circle cx="45" cy="48" r="7" fill="rgba(255,255,255,0.1)"/></svg>',defect:'Dark brown tone — over-mature or cold damage present'},
+  {name:'Corn',good:'<svg viewBox="0 0 80 80" width="80" height="80"><rect x="28" y="20" width="24" height="44" rx="12" fill="#f1c40f"/><line x1="40" y1="20" x2="40" y2="64" stroke="#e67e22" stroke-width="1.5"/><line x1="34" y1="22" x2="34" y2="62" stroke="#e67e22" stroke-width="1"/><line x1="46" y1="22" x2="46" y2="62" stroke="#e67e22" stroke-width="1"/><rect x="20" y="10" width="8" height="30" rx="4" fill="#27ae60" transform="rotate(-15,24,25)"/><rect x="52" y="10" width="8" height="30" rx="4" fill="#27ae60" transform="rotate(15,56,25)"/></svg>',bad:'<svg viewBox="0 0 80 80" width="80" height="80"><rect x="28" y="20" width="24" height="44" rx="12" fill="#f1c40f"/><circle cx="36" cy="35" r="4" fill="#7f8c8d"/><circle cx="44" cy="35" r="4" fill="#7f8c8d"/><circle cx="40" cy="47" r="4" fill="#7f8c8d"/><circle cx="34" cy="52" r="3" fill="#7f8c8d"/><rect x="20" y="10" width="8" height="30" rx="4" fill="#27ae60" transform="rotate(-15,24,25)"/><rect x="52" y="10" width="8" height="30" rx="4" fill="#27ae60" transform="rotate(15,56,25)"/></svg>',defect:'Multiple grey kernel spots — possible mold or pest damage'},
+  {name:'Bell Pepper',good:'<svg viewBox="0 0 80 80" width="80" height="80"><rect x="36" y="6" width="8" height="12" rx="4" fill="#27ae60"/><path d="M25,25 Q15,42 20,58 Q28,72 40,72 Q52,72 60,58 Q65,42 55,25 Q48,16 40,16 Q32,16 25,25Z" fill="#c0392b"/><path d="M40,16 Q40,42 40,72" stroke="#a93226" stroke-width="1.5" fill="none"/><path d="M25,30 Q40,20 55,30" stroke="#a93226" stroke-width="1" fill="none"/></svg>',bad:'<svg viewBox="0 0 80 80" width="80" height="80"><rect x="36" y="6" width="8" height="12" rx="4" fill="#27ae60"/><path d="M25,25 Q15,42 20,58 Q28,72 40,72 Q52,72 60,58 Q65,42 55,25 Q48,16 40,16 Q32,16 25,25Z" fill="#c0392b"/><circle cx="30" cy="45" r="8" fill="rgba(0,0,0,0.3)"/><circle cx="50" cy="55" r="6" fill="rgba(0,0,0,0.25)"/><path d="M40,16 Q40,42 40,72" stroke="#a93226" stroke-width="1.5" fill="none"/></svg>',defect:'Soft dark spots on skin — bacterial rot or impact damage'},
+];
+var qviScore=0,qviCorrect=0,qviTotal=0,qviBugs=0,qviTime=60,qviTimerID=null,qviVeg=null,qviGood=null,qviLocked=false;
+function qviStart(){
+  document.getElementById('qvi-start').style.display='none';
+  document.getElementById('qvi-play').style.display='block';
+  qviScore=0;qviCorrect=0;qviTotal=0;qviBugs=0;qviTime=60;qviLocked=false;
+  qviUpdateHUD();qviNext();
+  qviTimerID=setInterval(function(){
+    qviTime--;
+    document.getElementById('qvi-h-time').textContent=qviTime;
+    var pct=qviTime/60*100;
+    var bar=document.getElementById('qvi-tbar');
+    bar.style.width=pct+'%';
+    bar.style.background=pct>40?'#ff6b35':pct>20?'#f1c40f':'#e74c3c';
+    if(qviTime<=0){clearInterval(qviTimerID);qviTimerID=null;qviEnd();}
+  },1000);
+}
+function qviNext(){
+  qviVeg=QVI_VEGGIES[Math.floor(Math.random()*QVI_VEGGIES.length)];
+  qviGood=Math.random()>0.45;
+  qviLocked=false;
+  var card=document.getElementById('qvi-card');
+  card.className='go-vcard';
+  document.getElementById('qvi-flash-pass').className='go-vflash go-vflash-pass';
+  document.getElementById('qvi-flash-fail').className='go-vflash go-vflash-fail';
+  document.getElementById('qvi-svg').innerHTML=qviGood?qviVeg.good:qviVeg.bad;
+  document.getElementById('qvi-name').textContent=qviVeg.name;
+  document.getElementById('qvi-hint').textContent=qviGood?'No anomalies observed on initial scan':qviVeg.defect;
+}
+function qviJudge(pass){
+  if(qviLocked)return;
+  qviLocked=true;qviTotal++;
+  var ok=(pass===qviGood);
+  if(ok){qviCorrect++;qviScore+=10;if(!qviGood)qviBugs++;}
+  else{qviScore=Math.max(0,qviScore-5);}
+  var card=document.getElementById('qvi-card');
+  if(ok){card.classList.add('go-vcard-pass');document.getElementById('qvi-flash-pass').classList.add('go-vflash-show');}
+  else{card.classList.add('go-vcard-fail');document.getElementById('qvi-flash-fail').classList.add('go-vflash-show');}
+  qviUpdateHUD();
+  setTimeout(qviNext,500);
+}
+function qviUpdateHUD(){
+  document.getElementById('qvi-h-score').textContent=qviScore;
+  document.getElementById('qvi-h-acc').textContent=qviTotal?Math.round(qviCorrect/qviTotal*100)+'%':'—';
+}
+function qviEnd(){
+  document.getElementById('qvi-play').style.display='none';
+  document.getElementById('qvi-end').style.display='block';
+  var acc=qviTotal?Math.round(qviCorrect/qviTotal*100):0;
+  var g=acc>=90?'S':acc>=75?'A':acc>=60?'B':acc>=45?'C':'D';
+  document.getElementById('qvi-eg').textContent=g;
+  document.getElementById('qvi-es').textContent=qviScore;
+  document.getElementById('qvi-ec').textContent=qviCorrect+'/'+qviTotal;
+  document.getElementById('qvi-ea').textContent=acc+'%';
+  document.getElementById('qvi-eb').textContent=qviBugs+' caught';
+}
+function qviReset(){
+  if(qviTimerID){clearInterval(qviTimerID);qviTimerID=null;}
+  document.getElementById('qvi-end').style.display='none';
+  document.getElementById('qvi-start').style.display='block';
+}
+
+/* ---- BOF GAME ---- */
+var BOF_QS=[
+  {tag:'security',text:'The login form returns "Wrong password" for a valid email and "User not found" for an invalid email.',isFeat:false,why:'Bug — this leaks which emails are registered. Both cases should return the same generic message to prevent account enumeration attacks.'},
+  {tag:'security',text:'Pasting a password into the login field automatically clears your clipboard after 30 seconds.',isFeat:true,why:'Intentional security feature. Leaving a password in the clipboard is a risk. Many password managers do this deliberately.'},
+  {tag:'auth',text:'After clicking "Forgot password", the app emails you your current password in plain text.',isFeat:false,why:'Critical bug. Passwords must never be stored in plain text. If the app can email it, the data is exposed — only hashed passwords should ever be stored.'},
+  {tag:'ux',text:'The "Delete account" button requires you to type the word DELETE before it activates.',isFeat:true,why:'Classic destructive-action confirmation pattern. Forces intentional input so users do not accidentally delete accounts. Very deliberate UX.'},
+  {tag:'data',text:'The search results show up in a different order every time you run the same query.',isFeat:false,why:'Bug — non-deterministic sorting. Users expect consistent results. This usually means a missing ORDER BY clause or an unstable sort algorithm.'},
+  {tag:'security',text:'Users can reset their password back to the same password they just changed from.',isFeat:false,why:'Bug. Password history should be enforced — allowing the same password defeats the purpose of a forced reset, especially after a breach.'},
+  {tag:'ux',text:'The app shows a "Welcome back!" notification on every single login — even the 200th one.',isFeat:false,why:'Bug. Welcome-back messages should fire once or after a long absence, not every session. Constant noise trains users to ignore all notifications.'},
+  {tag:'perf',text:'Mobile users see a simplified dashboard with fewer charts than the desktop version.',isFeat:true,why:'Responsive design — an intentional feature. Rendering heavy charts on mobile wastes battery and hurts UX. Simplified views are a deliberate design decision.'},
+  {tag:'auth',text:'The registration form accepts " user@test.com" (with a leading space) as a valid email.',isFeat:false,why:'Bug. Input should be trimmed before validation. Leading or trailing spaces cause login mismatches and duplicate account issues downstream.'},
+  {tag:'security',text:'The API returns the exact same error message whether the password is wrong or the email does not exist.',isFeat:true,why:'Intentional security design. Distinct errors reveal which accounts exist — a classic enumeration attack vector. Same message means no information leak.'},
+  {tag:'data',text:'Submitting a form twice in quick succession creates two identical records in the database.',isFeat:false,why:'Bug — missing idempotency. The backend should detect duplicate submissions via request tokens or unique constraints and reject the second one.'},
+  {tag:'ux',text:'A red "Delete" button sits right next to a green "Save" button with no visual spacing between them.',isFeat:false,why:'UX bug. Placing a destructive action immediately adjacent to a primary action without separation causes accidental deletions. Visual weight separation is required.'},
+];
+var bofDeck=[],bofQi=0,bofScore=0,bofCorrect=0,bofStreak=0,bofBest=0,bofAnswered=false;
+function bofShuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function bofStart(){
+  bofDeck=bofShuffle(BOF_QS.slice());
+  bofQi=0;bofScore=0;bofCorrect=0;bofStreak=0;bofBest=0;bofAnswered=false;
+  document.getElementById('bof-start').style.display='none';
+  document.getElementById('bof-end').style.display='none';
+  document.getElementById('bof-game').style.display='block';
+  bofLoadQ();
+}
+function bofLoadQ(){
+  bofAnswered=false;
+  var q=bofDeck[bofQi];
+  document.getElementById('bof-tag').textContent=q.tag;
+  document.getElementById('bof-tag').className='go-btag go-btag-'+q.tag;
+  document.getElementById('bof-text').textContent=q.text;
+  document.getElementById('bof-h-q').textContent=(bofQi+1)+'/'+bofDeck.length;
+  document.getElementById('bof-pbar').style.width=Math.round(bofQi/bofDeck.length*100)+'%';
+  document.getElementById('bof-rev').style.display='none';
+  document.getElementById('bof-next').style.display='none';
+  document.getElementById('bof-bbug').disabled=false;
+  document.getElementById('bof-bfeat').disabled=false;
+  bofUpdH();
+}
+function bofAnswer(isFeat){
+  if(bofAnswered)return;
+  bofAnswered=true;
+  document.getElementById('bof-bbug').disabled=true;
+  document.getElementById('bof-bfeat').disabled=true;
+  var q=bofDeck[bofQi];
+  var right=(isFeat===q.isFeat);
+  if(right){bofCorrect++;bofScore+=10+(bofStreak>=2?5:0);bofStreak++;if(bofStreak>bofBest)bofBest=bofStreak;}
+  else{bofScore=Math.max(0,bofScore-3);bofStreak=0;}
+  var rev=document.getElementById('bof-rev');
+  rev.className='go-brev '+(right?'go-brev-ok':'go-brev-err');
+  rev.style.display='block';
+  document.getElementById('bof-rev-head').textContent=right?('Correct'+(bofStreak>1?' · '+bofStreak+' in a row':'')):('Not quite — it\'s a '+(q.isFeat?'feature':'bug'));
+  document.getElementById('bof-rev-body').textContent=q.why;
+  bofUpdH();
+  document.getElementById('bof-next').style.display='block';
+  document.getElementById('bof-next').textContent=bofQi<bofDeck.length-1?'Next →':'See results';
+}
+function bofUpdH(){
+  document.getElementById('bof-h-score').textContent=bofScore;
+  document.getElementById('bof-h-streak').textContent=bofStreak;
+}
+function bofNextQ(){
+  bofQi++;
+  if(bofQi>=bofDeck.length){bofEnd();return;}
+  bofLoadQ();
+}
+function bofEnd(){
+  document.getElementById('bof-game').style.display='none';
+  document.getElementById('bof-end').style.display='block';
+  var acc=Math.round(bofCorrect/bofDeck.length*100);
+  var g=acc>=90?'S':acc>=75?'A':acc>=58?'B':acc>=42?'C':'D';
+  var msgs={S:'Perfect score. You think like a senior QA lead.',A:'Excellent eye. You catch what most devs miss.',B:'Solid instincts. A few tricky ones got you.',C:'Not bad — some of these are genuinely subtle.',D:'These are hard. Read the explanations and replay.'};
+  document.getElementById('bof-eg').textContent=g;
+  document.getElementById('bof-es').textContent=bofScore;
+  document.getElementById('bof-emsg').textContent=msgs[g];
+  document.getElementById('bof-ec').textContent=bofCorrect+'/'+bofDeck.length;
+  document.getElementById('bof-ea').textContent=acc+'%';
+  document.getElementById('bof-estr').textContent=bofBest;
+}
+function bofReset(){
+  document.getElementById('bof-end').style.display='none';
+  document.getElementById('bof-start').style.display='block';
+}
+</script>
+
 </body>
 </html>
