@@ -549,9 +549,7 @@ footer{
   display:none;
   position:fixed;inset:0;z-index:1000;
   background:rgba(6,7,15,0.97);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  overflow-y:auto;
+  flex-direction:column;
   --surface-1:rgba(255,107,53,0.04);
   --border:rgba(255,107,53,0.14);
   --border-strong:rgba(255,107,53,0.3);
@@ -579,11 +577,13 @@ footer{
   --font-sans:'Space Grotesk',sans-serif;
   --font-mono:'JetBrains Mono',monospace;
 }
-#game-overlay.go-open{display:block;}
+#game-overlay.go-open{display:flex;}
 .go-wrap{max-width:540px;margin:0 auto;padding:5rem 1.5rem 4rem;}
 .go-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
 .go-label{font-family:var(--mono);font-size:0.72rem;color:var(--warm);letter-spacing:3px;text-transform:uppercase;}
-.go-close{position:fixed;top:1rem;right:1.5rem;z-index:1001;background:rgba(6,7,15,0.9);border:1px solid rgba(255,107,53,0.35);color:var(--warm);padding:0.4rem 1rem;cursor:pointer;font-family:var(--mono);font-size:0.72rem;letter-spacing:1px;transition:background 0.2s,border-color 0.2s;backdrop-filter:blur(8px);}
+.go-close{background:none;border:1px solid rgba(255,107,53,0.3);color:var(--warm);padding:0.4rem 1rem;cursor:pointer;font-family:var(--mono);font-size:0.72rem;letter-spacing:1px;transition:background 0.2s;}.go-close:hover{background:rgba(255,107,53,0.1);}
+.go-header{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1.5rem;border-bottom:1px solid rgba(255,107,53,0.12);background:rgba(6,7,15,0.99);}
+.go-scroll{flex:1;overflow-y:auto;}
 .go-close:hover{background:rgba(255,107,53,0.1);border-color:rgba(255,107,53,0.5);}
 .go-tabs{display:flex;border-bottom:1px solid rgba(255,107,53,0.14);margin-bottom:1.5rem;gap:0.2rem;}
 .go-tab{font-family:var(--mono);font-size:0.68rem;letter-spacing:1px;padding:0.65rem 1rem;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:rgba(122,122,138,0.75);cursor:pointer;transition:color 0.2s;}
@@ -996,6 +996,14 @@ footer{
   </div>
 </section>
 
+<section id="games-teaser" style="padding:6rem 2rem;text-align:center;position:relative;overflow:hidden;">
+  <div style="max-width:600px;margin:0 auto;position:relative;z-index:1;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#7a7a8a;letter-spacing:3px;text-transform:uppercase;margin-bottom:1.2rem;">// easter egg</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:#f5f0eb;letter-spacing:-0.5px;margin-bottom:1rem;">Explore some games</h2>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:rgba(122,122,138,0.9);line-height:1.7;margin-bottom:2.5rem;">if you want some fun!</p>
+    <button onclick="openGames()" style="background:#ff6b35;color:#06070f;border:none;padding:0.85rem 3rem;font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s,transform 0.15s;" onmouseenter="this.style.opacity='0.85';this.style.transform='translateY(-2px)'" onmouseleave="this.style.opacity='1';this.style.transform='translateY(0)'">PLAY</button>
+  </div>
+</section>
 <section id="contact">
   <h2>Let's work<br><span>together</span></h2>
   <p>Open to new opportunities, collaborations, and interesting QA challenges. Feel free to reach out.</p>
@@ -1008,7 +1016,7 @@ footer{
 </section>
 
 <footer>
-  <span>Abir Arshad · Dhaka, Bangladesh · 2026</span><a href="#" onclick="openGames();return false;" style="font-family:var(--mono);font-size:0.65rem;color:rgba(255,107,53,0.45);letter-spacing:2px;text-decoration:none;margin-left:1.5rem;transition:color 0.2s;" onmouseenter="this.style.color='rgba(255,107,53,1)'" onmouseleave="this.style.color='rgba(255,107,53,0.45)'">// play</a>
+  <span>Abir Arshad · Dhaka, Bangladesh · 2026</span>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -1154,11 +1162,11 @@ footer{
 </script>
 
 <div id="game-overlay">
-<div class="go-wrap">
-  <div class="go-top">
+<div class="go-header">
     <span class="go-label">// play</span>
     <button class="go-close" onclick="closeGames()">&#x2715; close</button>
   </div>
+<div class="go-scroll"><div class="go-wrap">
   <div class="go-tabs">
     <button class="go-tab go-tab-on" id="gtab0" onclick="switchGoTab(0)">// veggie inspector</button>
     <button class="go-tab" id="gtab1" onclick="switchGoTab(1)">// bug or feature?</button>
@@ -1263,6 +1271,8 @@ footer{
     </div>
   </div>
 
+</div>
+</div>
 </div>
 </div>
 
@@ -1441,7 +1451,7 @@ function bofReset(){
 
 
 <div id="play-egg" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:50;opacity:0;transition:opacity 0.4s;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'">
-  <a href="#" onclick="openGames();return false;" style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:rgba(255,107,53,0.5);letter-spacing:2px;text-decoration:none;transition:color 0.2s;" onmouseenter="this.style.color='rgba(255,107,53,1)'" onmouseleave="this.style.color='rgba(255,107,53,0.5)'">// play</a>
+  
 </div>
 <script>
 (function(){
