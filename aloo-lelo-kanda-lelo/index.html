@@ -944,7 +944,16 @@ const Sound=(()=>{
   let ctx=null,master=null,ambG=null,ambNodes=[],evTimer=null,cryTimer=null,mode='off';
   const prefs={on:true,voice:true};
   try{Object.assign(prefs,JSON.parse(lsGet('alkl-sound')||'{}'))}catch(e){}
+  let tAudio=null, wantTitle=false;
+  function title(on){
+    wantTitle=on;
+    if(on){
+      if(!tAudio){try{tAudio=new Audio('title.mp3');tAudio.loop=true;tAudio.volume=.75;tAudio.preload='auto'}catch(e){return}}
+      if(prefs.on){const p=tAudio.play();if(p&&p.catch)p.catch(()=>{})}
+    }else if(tAudio){tAudio.pause();try{tAudio.currentTime=0}catch(e){}}
+  }
   function unlock(){
+    if(wantTitle&&tAudio&&tAudio.paused&&prefs.on){const p=tAudio.play();if(p&&p.catch)p.catch(()=>{})}
     if(ctx){if(ctx.state==='suspended'&&!World.paused)ctx.resume().catch(()=>{});return}
     try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;ctx=new AC();master=ctx.createGain();master.gain.value=prefs.on?.7:0;master.connect(ctx.destination);if(mode!=='off')startAmb(mode)}catch(e){ctx=null}
   }
@@ -994,9 +1003,10 @@ const Sound=(()=>{
   function hawker(on){clearTimeout(cryTimer);if(!on)return;
     const go=()=>{cryTimer=setTimeout(()=>{if(World.mode!=='off'&&!World.paused&&World.level<2&&!(sell&&sell.custs.length)){say('आलू ले लो, कांदा ले लो!','hi',.8);if(!voiceFor('hi'))play('call')}go()},rand(9000,15000))};go()}
   function drawBtns(){document.querySelectorAll('.sndbox').forEach(b=>{b.innerHTML=`<button type="button" class="snd" data-act="snd" aria-pressed="${prefs.on}">${prefs.on?'🔊':'🔇'} শব্দ</button><button type="button" class="snd" data-act="voice" aria-pressed="${prefs.voice}" ${prefs.on?'':'disabled'}>${prefs.voice?'🗣️':'🤐'} কথা</button>`})}
-  function set(k,v){prefs[k]=v;lsSet('alkl-sound',JSON.stringify(prefs));if(master)master.gain.value=prefs.on?.7:0;if(!prefs.on||!prefs.voice){try{speechSynthesis.cancel()}catch(e){}}drawBtns()}
+  function set(k,v){prefs[k]=v;lsSet('alkl-sound',JSON.stringify(prefs));if(master)master.gain.value=prefs.on?.7:0;
+    if(tAudio){if(prefs.on&&wantTitle){const p=tAudio.play();if(p&&p.catch)p.catch(()=>{})}else tAudio.pause()}if(!prefs.on||!prefs.voice){try{speechSynthesis.cancel()}catch(e){}}drawBtns()}
   function suspend(p){if(p){try{speechSynthesis.cancel()}catch(e){}if(ctx)ctx.suspend().catch(()=>{})}else if(ctx)ctx.resume().catch(()=>{})}
-  return {play,say,hawker,set,prefs,suspend,drawBtns,
+  return {play,say,hawker,set,prefs,suspend,drawBtns,title,
     ambient(m){mode=m;if(ctx)startAmb(m)},
     stop(){stopAmb();clearTimeout(cryTimer);try{speechSynthesis.cancel()}catch(e){}},
     female:n=>/আপা|ভাবি|খালা|নানি/.test(n)};
@@ -1010,7 +1020,7 @@ function showLogin(msg=''){
   World.setMode('attract');
   const last=lsGet('alkl-last')||'';
   const fl=['🥔','🧅','🍅','🥕','🌶️','🍆','🥬','🎃','🥒','🍋','🧄','🥦'];
-  Sound.ambient('attract'); Sound.hawker(true);
+  Sound.ambient('attract'); Sound.hawker(false); Sound.title(true);
   L.innerHTML=`<div class="bunting" aria-hidden="true">${'<span></span>'.repeat(24)}</div><div class="sndbox float"></div>
    <div class="floaters" aria-hidden="true">${fl.map((e,i)=>`<span style="left:${4+i*8}%;animation-duration:${9+(i%5)*2.3}s;animation-delay:-${i*1.7}s">${e}</span>`).join('')}</div>
    <div class="login-in">
@@ -1078,7 +1088,7 @@ function resume(){
   if(!S.today||!S.today.counts) S.today=newToday();
   tab='bazar'; save(); enterApp();
 }
-function enterApp(){$('#login').hidden=true;$('#login').innerHTML='';$('#app').hidden=false;render()}
+function enterApp(){Sound.title(false);$('#login').hidden=true;$('#login').innerHTML='';$('#app').hidden=false;render()}
 function logout(){
   if(loop){clearInterval(loop);loop=null} sell=null;
   save(); lsDel('alkl-session'); authMode='login'; showLogin();
