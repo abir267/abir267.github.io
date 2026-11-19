@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Aloo Lelo Kanda Lelo — a free 3D Bangladeshi bazar game. Walk with a head basket, bargain with buyers and grow to a super market.">
-<meta property="og:title" content="Aloo Lelo Kanda Lelo">
+<meta name="description" content="Aaloo Lelo Kande Leloooo — a free 3D Bangladeshi bazar game. Walk with a head basket, bargain with buyers and grow to a super market.">
+<meta property="og:title" content="Aaloo Lelo Kande Leloooo">
 <meta property="og:description" content="পুরা বাংলাদেশ বাজার — ঝুড়ি মাথায় শুরু, সুপার মার্কেটে শেষ। ফ্রিতে খেলুন।">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%BA%3C/text%3E%3C/svg%3E">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<title>Aloo Lelo Kanda Lelo</title>
+<title>Aaloo Lelo Kande Leloooo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,10 +83,10 @@ button{cursor:pointer}
 .bunting span:nth-child(6n+4){background:#1d6fd6}.bunting span:nth-child(6n+5){background:#ff7ab6}.bunting span:nth-child(6n){background:#ff8c1a}
 .bunting span:nth-child(odd){animation-delay:-1.2s}
 @keyframes flag{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
-.login-in{max-width:1120px;margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,420px);gap:28px;align-items:center}
-@media (max-width:880px){.login-in{grid-template-columns:minmax(0,1fr)}}
+.login-in{position:relative;z-index:2;max-width:1120px;margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,420px);gap:28px;align-items:center}
+@media (max-width:880px){.login-in{grid-template-columns:minmax(0,1fr)}.logo{font-size:clamp(36px,11vw,72px)}}
 .kicker{display:inline-block;background:#e63946;color:#fff;font-family:var(--display);font-weight:800;font-size:17px;padding:2px 14px;border-radius:99px;border:2px solid #3a0a0a;margin:0 0 10px;box-shadow:0 3px 0 #3a0a0a}
-.logo{font-family:var(--logo);font-weight:400;font-size:clamp(54px,9.5vw,120px);line-height:.92;margin:0;color:#ffd23f;letter-spacing:.01em;
+.logo{font-family:var(--logo);font-weight:400;font-size:clamp(44px,6.4vw,88px);line-height:.95;white-space:nowrap;margin:0;color:#ffd23f;letter-spacing:.01em;
   -webkit-text-stroke:3px #3a1a00;paint-order:stroke fill;text-shadow:0 7px 0 #c2410c,0 12px 22px rgba(0,0,0,.45)}
 .logo span{display:inline-block;animation:drop .9s cubic-bezier(.2,1.6,.4,1) both,wob 3.2s ease-in-out infinite}
 .logo span:nth-child(1){animation-delay:.05s,1s}.logo span:nth-child(2){animation-delay:.2s,1.3s;color:#fff}
@@ -417,7 +417,7 @@ footer{margin-top:28px;color:var(--muted);font-size:12.5px;display:flex;justify-
   <div class="awning" aria-hidden="true"></div>
   <div class="wrap">
     <header class="top">
-      <div class="brand"><h1>Aloo Lelo <em>Kanda Lelo</em></h1><small>পুরা বাংলাদেশ বাজার · সবজি ব্যবসার খেলা</small></div>
+      <div class="brand"><h1>Aaloo Lelo <em>Kande Leloooo</em></h1><small>পুরা বাংলাদেশ বাজার · সবজি ব্যবসার খেলা</small></div>
       <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end"><div class="sndbox"></div><div class="stats" id="stats"></div></div>
     </header>
     <nav class="tabs" id="tabs"></nav>
@@ -1001,7 +1001,7 @@ const Sound=(()=>{
       const u=new SpeechSynthesisUtterance(text);u.voice=v;u.lang=v.lang;u.pitch=pitch;u.rate=lang==='hi'?.95:1.05;u.volume=.9;speechSynthesis.speak(u)}catch(e){}
   }
   function hawker(on){clearTimeout(cryTimer);if(!on)return;
-    const go=()=>{cryTimer=setTimeout(()=>{if(World.mode!=='off'&&!World.paused&&World.level<2&&!(sell&&sell.custs.length)){say('आलू ले लो, कांदा ले लो!','hi',.8);if(!voiceFor('hi'))play('call')}go()},rand(9000,15000))};go()}
+    const go=()=>{cryTimer=setTimeout(()=>{if(World.mode!=='off'&&!World.paused&&World.level<2&&!(sell&&sell.custs.length)){say('आलू ले लो, कांदे ले लोओओ!','hi',.8);if(!voiceFor('hi'))play('call')}go()},rand(9000,15000))};go()}
   function drawBtns(){document.querySelectorAll('.sndbox').forEach(b=>{b.innerHTML=`<button type="button" class="snd" data-act="snd" aria-pressed="${prefs.on}">${prefs.on?'🔊':'🔇'} শব্দ</button><button type="button" class="snd" data-act="voice" aria-pressed="${prefs.voice}" ${prefs.on?'':'disabled'}>${prefs.voice?'🗣️':'🤐'} কথা</button>`})}
   function set(k,v){prefs[k]=v;lsSet('alkl-sound',JSON.stringify(prefs));if(master)master.gain.value=prefs.on?.7:0;
     if(tAudio){if(prefs.on&&wantTitle){const p=tAudio.play();if(p&&p.catch)p.catch(()=>{})}else tAudio.pause()}if(!prefs.on||!prefs.voice){try{speechSynthesis.cancel()}catch(e){}}drawBtns()}
@@ -1026,7 +1026,7 @@ function showLogin(msg=''){
    <div class="login-in">
     <div>
       <p class="kicker">পুরা বাংলাদেশ বাজার</p>
-      <h1 class="logo"><span>Aloo</span> <span>Lelo</span><br><span>Kanda</span> <span>Lelo</span></h1>
+      <h1 class="logo"><span>Aaloo</span> <span>Lelo</span><br><span>Kande</span> <span>Leloooo</span></h1>
       <p class="tagline">ঝুড়ি মাথায় রাস্তায় নামেন, হাঁক দেন, দরদাম করেন। ভ্যান, দোকান পেরিয়ে একদিন সুপার মার্কেটের মালিক।</p>
     </div>
     <div class="glass">
@@ -1390,7 +1390,7 @@ function emptyState(){
   const el=$('#custs'); if(!el||!sell) return;
   const has=el.querySelector('.cust'), em=el.querySelector('.empty-q');
   if(has&&em) em.remove();
-  if(!has&&!em) el.insertAdjacentHTML('afterbegin',`<div class="empty-q">${lvl().road?'হাঁক দিন: “আলু লেলো, কান্দা লেলো!” ক্রেতা ডাকবে…':'দোকান খোলা। ক্রেতার অপেক্ষায়…'}</div>`);
+  if(!has&&!em) el.insertAdjacentHTML('afterbegin',`<div class="empty-q">${lvl().road?'হাঁক দিন: “আলু লেলো, কান্দে লেলোওও!” ক্রেতা ডাকবে…':'দোকান খোলা। ক্রেতার অপেক্ষায়…'}</div>`);
 }
 function cardHTML(c){
   const s=Math.max(0,Math.ceil(c.left/1000)), below=c.offer<c.cost;
@@ -1425,7 +1425,7 @@ function renderSelling(){
   $('#view').innerHTML=`<div class="fsplay" id="fsplay" role="region" aria-label="বিক্রির পর্দা">
     <div id="stageSlot" class="fs-stage"></div>
     <header class="fs-top">
-      <div class="fs-id"><b class="fs-logo">Aloo Lelo <em>Kanda Lelo</em></b><span>${L.e} ${esc(S.acct.store)} · ${L.title}</span></div>
+      <div class="fs-id"><b class="fs-logo">Aaloo Lelo <em>Kande Leloooo</em></b><span>${L.e} ${esc(S.acct.store)} · ${L.title}</span></div>
       <div class="fs-mid"><span class="tag">দিন ${bn(S.day)}</span><span class="tag">${season().name}কাল</span><span class="tag ev">${e.name}</span></div>
       <div class="fs-stats" id="fsStats"></div>
       <div class="fs-ctl"><div class="sndbox"></div><button type="button" class="fs-btn" data-act="fs" aria-label="পুরো স্ক্রিন">⛶</button><button type="button" class="fs-btn end" data-act="close">দিন শেষ</button></div>
